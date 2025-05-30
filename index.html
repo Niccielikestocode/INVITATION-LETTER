@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Invitación despedida PROM46</title>
+  <style>
+  	@import url('https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap');
+  	@import url('https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Funnel+Display:wght@300..800&display=swap');
+  	html {
+  		overflow-x: hidden;
+  	}
+  	body {
+  		margin: 0px;
+  		padding: 0px;
+  		position: relative;
+  		z-index: 0;
+  		overflow-x: hidden;
+  	}
+  	body::before {
+  		content: "";
+  		position: fixed; /* Para que no se mueva al hacer scroll */
+  		top: 0;
+  		left: 0;
+  		width: 100%;
+  		height: 100%;
+  		background-color: #214169;
+  		background-image: url("img/fondo2.png");
+  		background-size: cover;
+  		background-position: center;
+  		background-attachment: fixed;
+  		background-repeat: no-repeat;
+  		opacity: 1; 
+  		z-index: -1; /* Lo mandas al fondo para que no tape el contenido */
+	}
+    @font-face {
+  	  font-family: 'MiFuenteCool';
+  	  src: url('fuentes/SF-Pro.ttf') format('ttf');
+  	  font-weight: normal;
+  	  font-style: normal;
+	 }
+    #modalFondo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 1;
+      transition: opacity 1s ease;		
+    }
+
+    #modalFondo.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* ANIMACIÓN DE ENTRADA */
+    @keyframes aparecerZoom {
+      0% {
+        opacity: 0;
+        transform: translateY(0px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(-50px);
+      }
+    }
+
+    #modalContenido {
+      background-color: rgba(255,255,255, 0.8);
+      padding: 5px 30px;
+      width: 800px;
+      height: 180px;
+      border-radius: 40px;
+      animation: aparecerZoom 0.8s ease-out forwards;
+    }
+
+    .ventana, button {
+    	margin-left: 140px;
+    	display: flex;
+    	gap: 20px;
+    }
+
+
+    .pfp img {
+    	position: relative;
+    	bottom: 60px;
+    	width: 110px;
+    	height: 110px;
+    	border-radius: 100%;
+    	object-fit: cover;
+    }
+
+    .ventana p {
+      text-align: left;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      font-family: 'SF Pro', sans-serif;
+      font-weight: bold;
+      font-size: 30px;
+    }
+
+    .ventana .time {
+    	text-align: left;
+    	margin-left: auto;
+    	font-weight: normal;
+    }
+
+    #activarMusica {
+      padding: 20px 20px;
+      position: relative;
+      bottom: 120px;
+      width: 300px;
+      justify-content: center;
+      font-size: 30px;
+      border: none;
+      border-radius: 30px;
+      background-color: #ff69b4;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+
+    .video-invitacion video {
+      width: 100%;
+      display: block;
+      margin: 0px auto;
+      border-radius: 0px;
+    }
+    .frase {
+    	position: relative;
+    	top: 250px;
+    	width: 90%;
+    	margin: auto;
+    }
+
+    .frase p {
+    	font-size: 70px;
+    	font-family: "Fleur De Leah", cursive;
+    	color: #ffc663;
+    	text-align: center;
+    }
+
+    .separador {
+    	
+    	width: 800px;
+    	height: 200px;
+    	object-fit: cover;
+    	position: relative;
+    	left: 50%;
+    	transform: translateX(-50%);
+    	margin-top: 300px;
+    }
+
+    .date {
+    	font-size: 100px;
+    	font-family: "Fleur De Leah", cursive;
+    	color: #ffc663;
+    	text-align: center;	
+    }
+
+    .countdown-window {
+    	margin: auto;
+    	width: 80%;
+    	padding: 20px 50px;
+    }
+
+    .counter {
+    	font-size: 60px;
+    	font-family: "Funnel Display", sans-serif;
+    	color: #ffc663;
+    	text-align: center;
+    	font-weight: lighter;
+    }
+
+    .countdown {
+    	margin: auto;
+    	justify-content: center;
+    	margin-top: 70px;
+    	display: flex;
+    	gap: 50px;
+    	font-size: 50px;
+    	font-family: "Funnel Display", sans-serif;
+    	color: #ffc663;
+    	text-align: center;
+    	margin-bottom: -200px;
+    }
+
+    #mensajeFinal {
+    	justify-content: center;
+    	margin-top: 70px;
+    	font-size: 50px;
+    	font-family: "Funnel Display", sans-serif;
+    	color: #ffc663;
+    	text-align: center;
+    }
+
+	.copas {
+	  	width: 300px;
+	  	height: 300px;
+	  	object-fit: cover;
+	  	margin: 40px auto; /* Centrado y separación */
+	  	background-color: #ffc663; /* Dorado más puro */
+	  	-webkit-mask-image: url("img/copas-1.png");
+	  	-webkit-mask-repeat: no-repeat;
+	  	-webkit-mask-size: contain;
+	  	-webkit-mask-position: center;
+	  	mask-image: url("img/copas-1.png");
+	  	mask-repeat: no-repeat;
+	  	mask-size: contain;
+	  	mask-position: center;
+	  	filter: drop-shadow(0 0 5px #ffec8b);
+	  	animation: brilloDorado 2.5s infinite alternate ease-in-out;
+	}
+	
+	/* Animación de brillo dorado */
+	@keyframes brilloDorado {
+	  0% {
+	    filter: drop-shadow(0 0 5px #ffec8b) brightness(1);
+	  }
+	  100% {
+	    filter: drop-shadow(0 0 15px #fffacd) brightness(1.3);
+	  }
+	}
+
+	.recepcion {
+		padding: 10px;
+		background-color: #15365c;
+		margin: auto;
+		width: 100%;
+	}
+
+	.recepcion p{
+    	justify-content: center;
+    	font-size: 50px;
+    	font-family: "Funnel Display", sans-serif;
+    	color: #ffc663;
+    	text-align: center;
+    	font-weight: bold;
+	}
+	.place {
+		width: 600px;
+		margin: auto;
+		margin-top: 50px;
+	}
+	.place p{
+		justify-content: center;
+    	font-size: 30px;
+    	font-family: "Funnel Display", sans-serif;
+    	color: #ffc663;
+    	text-align: center;
+    	margin-bottom: 80px;
+    	font-weight: bold;
+	}
+	.dress-code {
+		padding: 10px;
+		background-color: #0c223b;
+		margin: auto;
+		width: 100%;
+		margin-bottom: -200px;
+	}
+	.dress-code p{
+    	justify-content: center;
+    	font-size: 50px;
+    	font-family: "Funnel Display", sans-serif;
+    	color: #ffc663;
+    	text-align: center;
+    	font-weight: bold;
+	}
+
+	.dress-img {
+		width: 300px;
+		margin: auto;
+	}
+	.dress-img img {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.dress-info p {
+		justify-content: center;
+    	font-size: 15px;
+    	font-family: "Funnel Display", sans-serif;
+    	color: #ffc663;
+    	text-align: center;
+    	font-weight: bold;
+	}
+
+	.dress-info2 p {
+		justify-content: center;
+    	font-size: 15px;
+    	font-family: "Funnel Display", sans-serif;
+    	color: #ffc663;
+    	text-align: center;
+    	font-weight: lighter;
+    	margin-bottom: 80px;	
+	}
+
+	.musica, .asistencia {
+		padding: 20px;
+		margin-bottom: 100px;
+	}
+
+	.musica {
+		margin-bottom: -200px;
+	}
+
+	.musica p {
+		margin-top: 100px;
+		justify-content: center;
+    	font-size: 50px;
+    	font-family: "Funnel Display", sans-serif;
+    	color: #ffc663;
+    	text-align: center;
+    	font-weight: bold;
+	}
+
+	.logo-musica {
+		width: 400px;
+		margin: auto;
+	}
+	.logo-musica img {
+		width: 100%;
+		justify-content: center;
+	}
+
+	.musica .text, .asistencia .text {
+		margin: auto;
+		width: 70%;
+		justify-content: center;
+    	font-size: 40px;
+    	font-family: "Funnel Display", sans-serif;
+    	color: #ffc663;
+    	text-align: center;
+    	font-weight: lighter;
+    	margin-bottom: 20px;
+	}
+
+	.musica a, .asistencia a {
+		text-decoration: none;
+	}
+
+	.button {
+		margin: auto;
+		margin-top: 50px;
+	  	padding: 40px 40px;
+      	position: relative;
+      	width: 500px;
+      	justify-content: center;
+      	font-size: 40px;
+      	font-family: "Funnel Display", sans-serif;
+      	border: none;
+      	border-radius: 50px;
+      	background-color: #bd934a;
+      	color: white;
+      	cursor: pointer;
+      	transition: all 0.3s ease;
+      	margin-bottom: 70px;
+	}
+
+	.asistencia {
+		margin-top: 100px;
+		width: 100%;
+		background-color: #15365c;
+		margin-bottom: 0px;
+	}
+
+	.asistencia p {
+		margin-top: 100px;
+		justify-content: center;
+    	font-size: 50px;
+    	font-family: "Funnel Display", sans-serif;
+    	color: #ffc663;
+    	text-align: center;
+    	font-weight: bold;
+	}
+
+	.bye-msg {
+		margin-bottom: 50px;
+	}
+
+
+  </style>
+
+</head>
+<body>
+
+<!-- Modal -->
+
+ <div id="modalFondo">
+  <div id="modalContenido">
+  	
+    <div class="ventana"><p>Tienes una nueva invitación!</p><p class="time">now</p></div>
+    <div class="pfp"><img src="img/foto-perfil.jpg"></div>
+    <button id="activarMusica">¡Entra!</button>
+  </div>
+</div> 
+
+<!-- Audio y video -->
+<audio id="musiquita" loop>
+  <source src="cancion.mp3" type="audio/mpeg">
+  Tu navegador no soporta audio 🥲
+</audio>
+
+<div class="video-invitacion">
+  <video id="video" muted>
+    <source src="video.mp4" type="video/mp4">
+    Tu navegador no soporta video 😢
+  </video>
+</div>
+
+<div class="frase"><p>Ha llegado el momento de decir "hasta pronto" a quienes han dejado huella en nuestros pasillos, nuestras risas y nuestros corazones. El grado décimo tiene el honor de invitarles a una noche inolvidable en homenaje a nuestros queridos estudiantes de grado once, quienes están listos para cerrar una etapa y comenzar otra llena de sueños, desafíos y conquistas. Celebremos juntos su esfuerzo, su historia y todo lo que está por venir. Porque las despedidas duelen, sí… pero también brillan, cuando se hacen con amor.</p></div>
+
+<img class="separador" src="img/separador.png">
+
+
+<p class="date">12 de Junio, 2025</p>
+
+
+<div class="countdown-window">
+ <div class="counter">FALTAN</div>
+  <div class="countdown">
+    <div><span id="dias">--</span><br>Días</div>
+    <div><span id="horas">--</span><br>Horas</div>
+    <div><span id="minutos">--</span><br>Min</div>
+    <div><span id="segundos">--</span><br>Seg</div>
+  </div>
+  <div id="mensajeFinal"></div>
+</div>
+
+<img class="separador" src="img/separador.png">
+
+<div class="recepcion">
+	<p>Recepción</p>
+	<div class="copas"></div>
+	<div class="place"><p>Colegio Leonístico "La Merced"<br>Calle 44N #3DN-41 Vipasa<br>Cali - Valle del Cauca<br> <br>4:30 PM</p></div>
+</div>
+
+<div class="dress-code">
+	<p>Dress Code</p>
+	<div class="dress-img"><img src="img/dress-code.png"></div>
+	<div class="dress-info"><p>Mujeres y Hombres</p></div>
+	<div class="dress-info2"><p>Ropa formal</p></div>
+</div>
+
+<img class="separador" src="img/separador.png">
+<div class="musica">
+		<p>Música</p>
+		<div class="logo-musica"><img src="img/musica.png"></div>
+		<p class="text">Ayúdanos a que todos disfrutemos del evento!</p>
+		<p class="text">Agrega la música que deseas escuchar dando click en "Playlist Spotify"</p>
+		<a href="https://open.spotify.com/playlist/3bWqUZUDoh0i4OLQ6Papul?si=d5c79ef3239c4874&pt=a016fec34d7c148b151b3e3216b341f8" target="blank"><button class="button">Playlist Spotify</button></a>
+	</div>
+
+<img class="separador" src="img/separador.png">
+
+<div class="asistencia">
+	<p>Confirmar Asistencia</p>
+	<p class="text">Para nosotros, es muy importante saber que contamos contigo para el evento. Por favor, registra el siguiente formulario para confirmar tu asistencia.</p>
+	<a href="#"><button class="button">Click aquí</button></a>
+	<p 	class="bye-msg">TE ESPERAMOS!</p>
+</div>
+
+  <script>
+    // 💥 Cambia esta fecha a lo que tú quieras
+    const fechaObjetivo = new Date("2025-06-12T16:30:00").getTime();
+
+    const dias = document.getElementById("dias");
+    const horas = document.getElementById("horas");
+    const minutos = document.getElementById("minutos");
+    const segundos = document.getElementById("segundos");
+    const mensajeFinal = document.getElementById("mensajeFinal");
+
+    const actualizarCuenta = setInterval(() => {
+      const ahora = new Date().getTime();
+      const diferencia = fechaObjetivo - ahora;
+
+      if (diferencia < 0) {
+        clearInterval(actualizarCuenta);
+        mensajeFinal.textContent = "llegó la hora! Disfruta del evento";
+        dias.textContent = horas.textContent = minutos.textContent = segundos.textContent = "00";
+        return;
+      }
+
+      const d = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+      dias.textContent = d;
+      horas.textContent = h.toString().padStart(2, '0');
+      minutos.textContent = m.toString().padStart(2, '0');
+      segundos.textContent = s.toString().padStart(2, '0');
+    }, 1000);
+  </script>
+
+<script>
+  const boton = document.getElementById("activarMusica");
+  const modal = document.getElementById("modalFondo");
+  const audio = document.getElementById("musiquita");
+  const video = document.getElementById("video");
+
+  boton.addEventListener("click", () => {
+    audio.play().catch((error) => {
+      console.error("Error al reproducir audio:", error);
+      alert("Oops 😬 No se pudo reproducir el audio.");
+    });
+
+    video.play().catch((error) => {
+      console.error("Error al reproducir video:", error);
+      alert("Oops 😬 No se pudo reproducir el video.");
+    });
+
+    modal.classList.add("fade-out");
+
+    setTimeout(() => {
+      modal.style.display = "none";
+    }, 1000);
+  });
+</script>
+
+</body>
+</html>
