@@ -1,502 +1,605 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Invitación despedida PROM46</title>
-  <style>
-  	@import url('https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap');
-  	@import url('https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Funnel+Display:wght@300..800&display=swap');
-  	html {
-  		overflow-x: hidden;
-  	}
-  	body {
-  		margin: 0px;
-  		padding: 0px;
-  		position: relative;
-  		z-index: 0;
-  		overflow-x: hidden;
-  	}
-  	body::before {
-  		content: "";
-  		position: fixed; /* Para que no se mueva al hacer scroll */
-  		top: 0;
-  		left: 0;
-  		width: 100%;
-  		height: 100%;
-  		background-color: #214169;
-  		background-image: url("img/fondo2.png");
-  		background-size: cover;
-  		background-position: center;
-  		background-attachment: fixed;
-  		background-repeat: no-repeat;
-  		opacity: 1; 
-  		z-index: -1; /* Lo mandas al fondo para que no tape el contenido */
-	}
-    @font-face {
-  	  font-family: 'MiFuenteCool';
-  	  src: url('fuentes/SF-Pro.ttf') format('ttf');
-  	  font-weight: normal;
-  	  font-style: normal;
-	 }
-    #modalFondo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 1);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      opacity: 1;
-      transition: opacity 1s ease;		
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Invitación a la despedida de grado</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Funnel+Display:wght@300..800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-900: #0c223b;
+  --navy-800: #15365c;
+  --navy-700: #214169;
+  --gold: #ffc663;
+  --gold-deep: #bd934a;
+  --ink: #fdf6e6;
+  --glass: rgba(21, 54, 92, 0.55);
+  --glass-line: rgba(255, 198, 99, 0.28);
+  --script: "Fleur De Leah", cursive;
+  --sans: "Funnel Display", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pad: clamp(20px, 5vw, 48px);
+}
 
-    #modalFondo.fade-out {
-      opacity: 0;
-      pointer-events: none;
-    }
+*, *::before, *::after { box-sizing: border-box; }
 
-    /* ANIMACIÓN DE ENTRADA */
-    @keyframes aparecerZoom {
-      0% {
-        opacity: 0;
-        transform: translateY(0px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(-50px);
-      }
-    }
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
 
-    #modalContenido {
-      background-color: rgba(255,255,255, 0.8);
-      padding: 5px 30px;
-      width: 800px;
-      height: 180px;
-      border-radius: 40px;
-      animation: aparecerZoom 0.8s ease-out forwards;
-    }
+body {
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background-color: var(--navy-900);
+  color: var(--ink);
+  font-family: var(--sans);
+  line-height: 1.6;
+}
 
-    .ventana, button {
-    	margin-left: 140px;
-    	display: flex;
-    	gap: 20px;
-    }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-color: var(--navy-700);
+  background-image: url("img/fondo2.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, rgba(12, 34, 59, 0.55), rgba(12, 34, 59, 0.85));
+}
 
-    .pfp img {
-    	position: relative;
-    	bottom: 60px;
-    	width: 110px;
-    	height: 110px;
-    	border-radius: 100%;
-    	object-fit: cover;
-    }
+img, video { max-width: 100%; }
 
-    .ventana p {
-      text-align: left;
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-      font-family: 'SF Pro', sans-serif;
-      font-weight: bold;
-      font-size: 30px;
-    }
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 4px;
+}
 
-    .ventana .time {
-    	text-align: left;
-    	margin-left: auto;
-    	font-weight: normal;
-    }
+#modalFondo {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--pad);
+  background: radial-gradient(circle at 50% 35%, #1d3c63 0%, #08111d 65%, #000 100%);
+  transition: opacity 1s ease, visibility 1s ease;
+}
 
-    #activarMusica {
-      padding: 20px 20px;
-      position: relative;
-      bottom: 120px;
-      width: 300px;
-      justify-content: center;
-      font-size: 30px;
-      border: none;
-      border-radius: 30px;
-      background-color: #ff69b4;
-      color: white;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+#modalFondo.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
 
+.notificacion {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  padding: 20px;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.96);
+  color: #14202e;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+  animation: bajar 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
 
-    .video-invitacion video {
-      width: 100%;
-      display: block;
-      margin: 0px auto;
-      border-radius: 0px;
-    }
-    .frase {
-    	position: relative;
-    	top: 250px;
-    	width: 90%;
-    	margin: auto;
-    }
+.notificacion::before,
+.notificacion::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  z-index: -1;
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.35);
+}
 
-    .frase p {
-    	font-size: 70px;
-    	font-family: "Fleur De Leah", cursive;
-    	color: #ffc663;
-    	text-align: center;
-    }
+.notificacion::before {
+  bottom: -10px;
+  width: 92%;
+  height: 40px;
+  transform: translateX(-50%);
+}
 
-    .separador {
-    	
-    	width: 800px;
-    	height: 200px;
-    	object-fit: cover;
-    	position: relative;
-    	left: 50%;
-    	transform: translateX(-50%);
-    	margin-top: 300px;
-    }
+.notificacion::after {
+  bottom: -19px;
+  width: 82%;
+  height: 40px;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.18);
+}
 
-    .date {
-    	font-size: 100px;
-    	font-family: "Fleur De Leah", cursive;
-    	color: #ffc663;
-    	text-align: center;	
-    }
+@keyframes bajar {
+  from { opacity: 0; transform: translateY(-60px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
 
-    .countdown-window {
-    	margin: auto;
-    	width: 80%;
-    	padding: 20px 50px;
-    }
+.notif-cabecera {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  font-size: 14px;
+  color: #5b6672;
+}
 
-    .counter {
-    	font-size: 60px;
-    	font-family: "Funnel Display", sans-serif;
-    	color: #ffc663;
-    	text-align: center;
-    	font-weight: lighter;
-    }
+.notif-app {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 7px;
+  background: var(--navy-800);
+  color: var(--gold);
+}
 
-    .countdown {
-    	margin: auto;
-    	justify-content: center;
-    	margin-top: 70px;
-    	display: flex;
-    	gap: 50px;
-    	font-size: 50px;
-    	font-family: "Funnel Display", sans-serif;
-    	color: #ffc663;
-    	text-align: center;
-    	margin-bottom: -200px;
-    }
+.notif-app svg { width: 14px; height: 14px; }
 
-    #mensajeFinal {
-    	justify-content: center;
-    	margin-top: 70px;
-    	font-size: 50px;
-    	font-family: "Funnel Display", sans-serif;
-    	color: #ffc663;
-    	text-align: center;
-    }
+.notif-cabecera .time { margin-left: auto; }
 
-	.copas {
-	  	width: 300px;
-	  	height: 300px;
-	  	object-fit: cover;
-	  	margin: 40px auto; /* Centrado y separación */
-	  	background-color: #ffc663; /* Dorado más puro */
-	  	-webkit-mask-image: url("img/copas-1.png");
-	  	-webkit-mask-repeat: no-repeat;
-	  	-webkit-mask-size: contain;
-	  	-webkit-mask-position: center;
-	  	mask-image: url("img/copas-1.png");
-	  	mask-repeat: no-repeat;
-	  	mask-size: contain;
-	  	mask-position: center;
-	  	filter: drop-shadow(0 0 5px #ffec8b);
-	  	animation: brilloDorado 2.5s infinite alternate ease-in-out;
-	}
-	
-	/* Animación de brillo dorado */
-	@keyframes brilloDorado {
-	  0% {
-	    filter: drop-shadow(0 0 5px #ffec8b) brightness(1);
-	  }
-	  100% {
-	    filter: drop-shadow(0 0 15px #fffacd) brightness(1.3);
-	  }
-	}
+.notif-cuerpo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
 
-	.recepcion {
-		padding: 10px;
-		background-color: #15365c;
-		margin: auto;
-		width: 100%;
-	}
+.notif-sello {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: clamp(52px, 15vw, 64px);
+  height: clamp(52px, 15vw, 64px);
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--navy-700), var(--navy-900));
+  color: var(--gold);
+  box-shadow: 0 0 0 4px rgba(255, 198, 99, 0.35);
+}
 
-	.recepcion p{
-    	justify-content: center;
-    	font-size: 50px;
-    	font-family: "Funnel Display", sans-serif;
-    	color: #ffc663;
-    	text-align: center;
-    	font-weight: bold;
-	}
-	.place {
-		width: 600px;
-		margin: auto;
-		margin-top: 50px;
-	}
-	.place p{
-		justify-content: center;
-    	font-size: 30px;
-    	font-family: "Funnel Display", sans-serif;
-    	color: #ffc663;
-    	text-align: center;
-    	margin-bottom: 80px;
-    	font-weight: bold;
-	}
-	.dress-code {
-		padding: 10px;
-		background-color: #0c223b;
-		margin: auto;
-		width: 100%;
-		margin-bottom: -200px;
-	}
-	.dress-code p{
-    	justify-content: center;
-    	font-size: 50px;
-    	font-family: "Funnel Display", sans-serif;
-    	color: #ffc663;
-    	text-align: center;
-    	font-weight: bold;
-	}
+.notif-sello svg { width: 55%; height: 55%; }
 
-	.dress-img {
-		width: 300px;
-		margin: auto;
-	}
-	.dress-img img {
-		width: 100%;
-		justify-content: center;
-	}
+.notif-texto { min-width: 0; }
 
-	.dress-info p {
-		justify-content: center;
-    	font-size: 15px;
-    	font-family: "Funnel Display", sans-serif;
-    	color: #ffc663;
-    	text-align: center;
-    	font-weight: bold;
-	}
+.notif-texto strong {
+  display: block;
+  font-size: clamp(18px, 5vw, 22px);
+  line-height: 1.25;
+}
 
-	.dress-info2 p {
-		justify-content: center;
-    	font-size: 15px;
-    	font-family: "Funnel Display", sans-serif;
-    	color: #ffc663;
-    	text-align: center;
-    	font-weight: lighter;
-    	margin-bottom: 80px;	
-	}
+.notif-texto p {
+  margin: 4px 0 0;
+  font-size: clamp(14px, 3.8vw, 16px);
+  line-height: 1.45;
+  color: #4a5561;
+}
 
-	.musica, .asistencia {
-		padding: 20px;
-		margin-bottom: 100px;
-	}
+#activarMusica {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 16px 20px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--navy-800);
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: clamp(17px, 4.6vw, 20px);
+  font-weight: 700;
+  cursor: pointer;
+  animation: pulso 2.2s infinite;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
 
-	.musica {
-		margin-bottom: -200px;
-	}
+#activarMusica:hover { background: var(--navy-900); }
+#activarMusica:active { transform: scale(0.98); }
 
-	.musica p {
-		margin-top: 100px;
-		justify-content: center;
-    	font-size: 50px;
-    	font-family: "Funnel Display", sans-serif;
-    	color: #ffc663;
-    	text-align: center;
-    	font-weight: bold;
-	}
+@keyframes pulso {
+  0% { box-shadow: 0 0 0 0 rgba(33, 65, 105, 0.5); }
+  70% { box-shadow: 0 0 0 14px rgba(33, 65, 105, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(33, 65, 105, 0); }
+}
 
-	.logo-musica {
-		width: 400px;
-		margin: auto;
-	}
-	.logo-musica img {
-		width: 100%;
-		justify-content: center;
-	}
+.video-invitacion {
+  width: 100%;
+  background: var(--navy-900);
+}
 
-	.musica .text, .asistencia .text {
-		margin: auto;
-		width: 70%;
-		justify-content: center;
-    	font-size: 40px;
-    	font-family: "Funnel Display", sans-serif;
-    	color: #ffc663;
-    	text-align: center;
-    	font-weight: lighter;
-    	margin-bottom: 20px;
-	}
+.video-invitacion video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 100svh;
+  object-fit: cover;
+}
 
-	.musica a, .asistencia a {
-		text-decoration: none;
-	}
+main {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  padding: clamp(48px, 9vw, 110px) var(--pad);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(28px, 5vw, 56px);
+}
 
-	.button {
-		margin: auto;
-		margin-top: 50px;
-	  	padding: 40px 40px;
-      	position: relative;
-      	width: 500px;
-      	justify-content: center;
-      	font-size: 40px;
-      	font-family: "Funnel Display", sans-serif;
-      	border: none;
-      	border-radius: 50px;
-      	background-color: #bd934a;
-      	color: white;
-      	cursor: pointer;
-      	transition: all 0.3s ease;
-      	margin-bottom: 70px;
-	}
+.card {
+  padding: clamp(28px, 6vw, 64px) clamp(20px, 5vw, 56px);
+  border: 1px solid var(--glass-line);
+  border-radius: clamp(20px, 4vw, 36px);
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  text-align: center;
+}
 
-	.asistencia {
-		margin-top: 100px;
-		width: 100%;
-		background-color: #15365c;
-		margin-bottom: 0px;
-	}
+.titulo {
+  margin: 0 0 clamp(16px, 3vw, 28px);
+  font-size: clamp(30px, 6.5vw, 52px);
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--gold);
+}
 
-	.asistencia p {
-		margin-top: 100px;
-		justify-content: center;
-    	font-size: 50px;
-    	font-family: "Funnel Display", sans-serif;
-    	color: #ffc663;
-    	text-align: center;
-    	font-weight: bold;
-	}
+.texto {
+  max-width: 62ch;
+  margin: 0 auto;
+  font-size: clamp(17px, 2.6vw, 22px);
+  font-weight: 300;
+  color: var(--ink);
+}
 
-	.bye-msg {
-		margin-bottom: 50px;
-	}
+.texto + .texto { margin-top: 16px; }
 
+.frase p {
+  margin: 0;
+  font-family: var(--script);
+  font-size: clamp(30px, 6.4vw, 56px);
+  line-height: 1.3;
+  color: var(--gold);
+}
 
-  </style>
+.separador {
+  display: block;
+  width: min(100%, 560px);
+  height: auto;
+  margin: 0 auto;
+  opacity: 0.95;
+}
 
+.fecha-bloque {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(16px, 3vw, 28px);
+}
+
+.date {
+  margin: 0;
+  font-family: var(--script);
+  font-size: clamp(54px, 15vw, 120px);
+  line-height: 1.05;
+  color: var(--gold);
+  text-align: center;
+}
+
+.counter {
+  font-size: clamp(16px, 3.4vw, 24px);
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  color: var(--gold);
+}
+
+.countdown {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(8px, 2vw, 20px);
+}
+
+.countdown > div {
+  padding: clamp(12px, 3vw, 26px) 4px;
+  border: 1px solid var(--glass-line);
+  border-radius: clamp(14px, 3vw, 22px);
+  background: rgba(12, 34, 59, 0.6);
+  font-size: clamp(12px, 2.6vw, 18px);
+  font-weight: 300;
+  color: var(--ink);
+  text-align: center;
+}
+
+.countdown span {
+  display: block;
+  font-size: clamp(28px, 8vw, 64px);
+  font-weight: 700;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  color: var(--gold);
+}
+
+#mensajeFinal {
+  min-height: 1.6em;
+  font-size: clamp(18px, 4vw, 28px);
+  color: var(--gold);
+  text-align: center;
+}
+
+.copas {
+  width: clamp(140px, 36vw, 240px);
+  aspect-ratio: 1 / 1;
+  margin: 0 auto clamp(12px, 3vw, 24px);
+  background-color: var(--gold);
+  -webkit-mask-image: url("img/copas-1.png");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  -webkit-mask-position: center;
+  mask-image: url("img/copas-1.png");
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  mask-position: center;
+  animation: brillo 2.5s infinite alternate ease-in-out;
+}
+
+@keyframes brillo {
+  from { filter: drop-shadow(0 0 5px #ffec8b) brightness(1); }
+  to { filter: drop-shadow(0 0 14px #fffacd) brightness(1.25); }
+}
+
+.lugar {
+  margin: 0;
+  font-size: clamp(18px, 3.4vw, 26px);
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.hora {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 8px 28px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--navy-900);
+  font-size: clamp(18px, 3.6vw, 26px);
+  font-weight: 700;
+}
+
+.dress-img {
+  width: min(70%, 280px);
+  margin: 0 auto clamp(16px, 3vw, 28px);
+}
+
+.dress-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.dress-info {
+  margin: 0;
+  font-size: clamp(18px, 3.6vw, 26px);
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.dress-info2 {
+  margin: 6px 0 0;
+  font-size: clamp(16px, 3vw, 22px);
+  font-weight: 300;
+  color: var(--ink);
+}
+
+.logo-musica {
+  width: min(60%, 260px);
+  margin: 0 auto clamp(16px, 3vw, 28px);
+}
+
+.logo-musica img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.boton {
+  display: inline-block;
+  width: 100%;
+  max-width: 360px;
+  margin-top: clamp(24px, 4vw, 36px);
+  padding: 18px 28px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: var(--navy-900);
+  font-family: var(--sans);
+  font-size: clamp(18px, 3.6vw, 24px);
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.boton:hover {
+  background: #ffd488;
+  box-shadow: 0 10px 30px rgba(255, 198, 99, 0.3);
+}
+
+.boton:active { transform: scale(0.98); }
+
+.despedida {
+  margin: clamp(28px, 5vw, 48px) 0 0;
+  font-size: clamp(26px, 6vw, 44px);
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 480px) {
+  .countdown { gap: 6px; }
+  .notif-cabecera { font-size: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .copas, .notificacion, #activarMusica { animation: none; }
+  #modalFondo { transition: none; }
+}
+</style>
 </head>
 <body>
 
-<!-- Modal -->
-
- <div id="modalFondo">
-  <div id="modalContenido">
-  	
-    <div class="ventana"><p>Tienes una nueva invitación!</p><p class="time">now</p></div>
-    <div class="pfp"><img src="img/foto-perfil.jpg"></div>
-    <button id="activarMusica">¡Entra!</button>
+<div id="modalFondo" role="dialog" aria-modal="true" aria-label="Nueva invitación">
+  <div class="notificacion">
+    <div class="notif-cabecera">
+      <span class="notif-app">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg>
+      </span>
+      <span>Invitaciones</span>
+      <span class="time">ahora</span>
+    </div>
+    <div class="notif-cuerpo">
+      <div class="notif-sello">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg>
+      </div>
+      <div class="notif-texto">
+        <strong>Tienes una nueva invitación</strong>
+        <p>Una noche especial te espera. Ábrela para ver todos los detalles.</p>
+      </div>
+    </div>
+    <button id="activarMusica" type="button">Abrir invitación</button>
   </div>
-</div> 
+</div>
 
-<!-- Audio y video -->
 <audio id="musiquita" loop>
   <source src="cancion.mp3" type="audio/mpeg">
-  Tu navegador no soporta audio 🥲
+  Tu navegador no soporta audio.
 </audio>
 
 <div class="video-invitacion">
-  <video id="video" muted>
+  <video id="video" muted playsinline preload="auto">
     <source src="video.mp4" type="video/mp4">
-    Tu navegador no soporta video 😢
+    Tu navegador no soporta video.
   </video>
 </div>
 
-<div class="frase"><p>Ha llegado el momento de decir "hasta pronto" a quienes han dejado huella en nuestros pasillos, nuestras risas y nuestros corazones. El grado décimo tiene el honor de invitarles a una noche inolvidable en homenaje a nuestros queridos estudiantes de grado once, quienes están listos para cerrar una etapa y comenzar otra llena de sueños, desafíos y conquistas. Celebremos juntos su esfuerzo, su historia y todo lo que está por venir. Porque las despedidas duelen, sí… pero también brillan, cuando se hacen con amor.</p></div>
+<main>
 
-<img class="separador" src="img/separador.png">
+  <section class="card frase reveal">
+    <p>Ha llegado el momento de decir "hasta pronto" a quienes han dejado huella en nuestros pasillos, nuestras risas y nuestros corazones.</p>
+    <p class="texto" style="margin-top: 28px;">El grado décimo tiene el honor de invitarles a una noche inolvidable en homenaje a nuestros queridos estudiantes de grado once, quienes están listos para cerrar una etapa y comenzar otra llena de sueños, desafíos y conquistas. Celebremos juntos su esfuerzo, su historia y todo lo que está por venir. Porque las despedidas duelen, sí, pero también brillan, cuando se hacen con amor.</p>
+  </section>
 
+  <img class="separador reveal" src="img/separador.png" alt="">
 
-<p class="date">12 de Junio, 2025</p>
+  <section class="fecha-bloque reveal">
+    <p class="date" id="fechaTexto" data-fecha="2027-06-12T16:30:00">Día de Mes, Año</p>
+    <div class="counter">FALTAN</div>
+    <div class="countdown">
+      <div><span id="dias">--</span>Días</div>
+      <div><span id="horas">--</span>Horas</div>
+      <div><span id="minutos">--</span>Min</div>
+      <div><span id="segundos">--</span>Seg</div>
+    </div>
+    <div id="mensajeFinal" aria-live="polite"></div>
+  </section>
 
+  <img class="separador reveal" src="img/separador.png" alt="">
 
-<div class="countdown-window">
- <div class="counter">FALTAN</div>
-  <div class="countdown">
-    <div><span id="dias">--</span><br>Días</div>
-    <div><span id="horas">--</span><br>Horas</div>
-    <div><span id="minutos">--</span><br>Min</div>
-    <div><span id="segundos">--</span><br>Seg</div>
-  </div>
-  <div id="mensajeFinal"></div>
-</div>
+  <section class="card recepcion reveal">
+    <h2 class="titulo">Recepción</h2>
+    <div class="copas" role="img" aria-label="Copas"></div>
+    <p class="lugar">Nombre del lugar<br>Dirección completa<br>Ciudad - Departamento</p>
+    <span class="hora" id="horaTexto">00:00</span>
+  </section>
 
-<img class="separador" src="img/separador.png">
+  <section class="card dress-code reveal">
+    <h2 class="titulo">Dress Code</h2>
+    <div class="dress-img"><img src="img/dress-code.png" alt="Código de vestimenta"></div>
+    <p class="dress-info">Mujeres y Hombres</p>
+    <p class="dress-info2">Ropa formal</p>
+  </section>
 
-<div class="recepcion">
-	<p>Recepción</p>
-	<div class="copas"></div>
-	<div class="place"><p>Colegio Leonístico "La Merced"<br>Calle 44N #3DN-41 Vipasa<br>Cali - Valle del Cauca<br> <br>4:30 PM</p></div>
-</div>
+  <img class="separador reveal" src="img/separador.png" alt="">
 
-<div class="dress-code">
-	<p>Dress Code</p>
-	<div class="dress-img"><img src="img/dress-code.png"></div>
-	<div class="dress-info"><p>Mujeres y Hombres</p></div>
-	<div class="dress-info2"><p>Ropa formal</p></div>
-</div>
+  <section class="card musica reveal">
+    <h2 class="titulo">Música</h2>
+    <div class="logo-musica"><img src="img/musica.png" alt="Música"></div>
+    <p class="texto">Ayúdanos a que todos disfrutemos del evento.</p>
+    <p class="texto">Agrega la música que deseas escuchar dando clic en "Abrir playlist".</p>
+    <a class="boton" href="#" target="_blank" rel="noopener noreferrer">Abrir playlist</a>
+  </section>
 
-<img class="separador" src="img/separador.png">
-<div class="musica">
-		<p>Música</p>
-		<div class="logo-musica"><img src="img/musica.png"></div>
-		<p class="text">Ayúdanos a que todos disfrutemos del evento!</p>
-		<p class="text">Agrega la música que deseas escuchar dando click en "Playlist Spotify"</p>
-		<a href="https://open.spotify.com/playlist/3bWqUZUDoh0i4OLQ6Papul?si=d5c79ef3239c4874&pt=a016fec34d7c148b151b3e3216b341f8" target="blank"><button class="button">Playlist Spotify</button></a>
-	</div>
+  <section class="card asistencia reveal">
+    <h2 class="titulo">Confirmar asistencia</h2>
+    <p class="texto">Para nosotros es muy importante saber que contamos contigo para el evento. Por favor, registra el siguiente formulario para confirmar tu asistencia.</p>
+    <a class="boton" href="#">Confirmar aquí</a>
+    <p class="despedida">TE ESPERAMOS</p>
+  </section>
 
-<img class="separador" src="img/separador.png">
+</main>
 
-<div class="asistencia">
-	<p>Confirmar Asistencia</p>
-	<p class="text">Para nosotros, es muy importante saber que contamos contigo para el evento. Por favor, registra el siguiente formulario para confirmar tu asistencia.</p>
-	<a href="#"><button class="button">Click aquí</button></a>
-	<p 	class="bye-msg">TE ESPERAMOS!</p>
-</div>
+<script>
+  const fechaTexto = document.getElementById("fechaTexto");
+  const horaTexto = document.getElementById("horaTexto");
+  const fechaBase = new Date(fechaTexto.dataset.fecha);
+  const fechaObjetivo = fechaBase.getTime();
 
-  <script>
-    // 💥 Cambia esta fecha a lo que tú quieras
-    const fechaObjetivo = new Date("2025-06-12T16:30:00").getTime();
+  fechaTexto.textContent = fechaBase.toLocaleDateString("es-CO", { day: "numeric", month: "long", year: "numeric" });
+  horaTexto.textContent = fechaBase.toLocaleTimeString("es-CO", { hour: "numeric", minute: "2-digit", hour12: true }).toUpperCase();
 
-    const dias = document.getElementById("dias");
-    const horas = document.getElementById("horas");
-    const minutos = document.getElementById("minutos");
-    const segundos = document.getElementById("segundos");
-    const mensajeFinal = document.getElementById("mensajeFinal");
+  const dias = document.getElementById("dias");
+  const horas = document.getElementById("horas");
+  const minutos = document.getElementById("minutos");
+  const segundos = document.getElementById("segundos");
+  const mensajeFinal = document.getElementById("mensajeFinal");
 
-    const actualizarCuenta = setInterval(() => {
-      const ahora = new Date().getTime();
-      const diferencia = fechaObjetivo - ahora;
+  function actualizarCuenta() {
+    const diferencia = fechaObjetivo - Date.now();
 
-      if (diferencia < 0) {
-        clearInterval(actualizarCuenta);
-        mensajeFinal.textContent = "llegó la hora! Disfruta del evento";
-        dias.textContent = horas.textContent = minutos.textContent = segundos.textContent = "00";
-        return;
-      }
+    if (diferencia < 0) {
+      clearInterval(intervalo);
+      mensajeFinal.textContent = "Llegó la hora. Disfruta del evento";
+      dias.textContent = horas.textContent = minutos.textContent = segundos.textContent = "00";
+      return;
+    }
 
-      const d = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-      const h = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const m = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((diferencia % (1000 * 60)) / 1000);
+    const d = Math.floor(diferencia / 86400000);
+    const h = Math.floor((diferencia % 86400000) / 3600000);
+    const m = Math.floor((diferencia % 3600000) / 60000);
+    const s = Math.floor((diferencia % 60000) / 1000);
 
-      dias.textContent = d;
-      horas.textContent = h.toString().padStart(2, '0');
-      minutos.textContent = m.toString().padStart(2, '0');
-      segundos.textContent = s.toString().padStart(2, '0');
-    }, 1000);
-  </script>
+    dias.textContent = d;
+    horas.textContent = String(h).padStart(2, "0");
+    minutos.textContent = String(m).padStart(2, "0");
+    segundos.textContent = String(s).padStart(2, "0");
+  }
+
+  const intervalo = setInterval(actualizarCuenta, 1000);
+  actualizarCuenta();
+</script>
 
 <script>
   const boton = document.getElementById("activarMusica");
@@ -507,12 +610,10 @@
   boton.addEventListener("click", () => {
     audio.play().catch((error) => {
       console.error("Error al reproducir audio:", error);
-      alert("Oops 😬 No se pudo reproducir el audio.");
     });
 
     video.play().catch((error) => {
       console.error("Error al reproducir video:", error);
-      alert("Oops 😬 No se pudo reproducir el video.");
     });
 
     modal.classList.add("fade-out");
@@ -521,6 +622,23 @@
       modal.style.display = "none";
     }, 1000);
   });
+
+  const elementos = document.querySelectorAll(".reveal");
+
+  if ("IntersectionObserver" in window) {
+    const observador = new IntersectionObserver((entradas) => {
+      entradas.forEach((entrada) => {
+        if (entrada.isIntersecting) {
+          entrada.target.classList.add("visible");
+          observador.unobserve(entrada.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    elementos.forEach((el) => observador.observe(el));
+  } else {
+    elementos.forEach((el) => el.classList.add("visible"));
+  }
 </script>
 
 </body>
