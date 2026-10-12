@@ -3,96 +3,106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#200c18">
-<title>Noche de despedida</title>
+<meta name="theme-color" content="#0f0b24">
+<meta name="color-scheme" content="dark">
+<title>Invitación</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@1,6..96,400..600&family=Hanken+Grotesk:wght@300..600&display=swap" rel="stylesheet">
-<noscript><style>.portada{display:none}.a{animation:none!important}</style></noscript>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
 :root {
-  --fondo: #200c18;
-  --sobre-1: #3b1829;
-  --sobre-2: #4a1f33;
-  --sobre-3: #5a2740;
-  --linea: rgba(233, 211, 168, 0.22);
-  --champan: #e9d3a8;
-  --rosa: #f2a7a0;
-  --texto: #f6ede3;
-  --display: "Bodoni Moda", Georgia, "Times New Roman", serif;
-  --sans: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --margen: clamp(22px, 6vw, 64px);
-  --salida: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --noche: #0f0b24;
+  --indigo: #2b206e;
+  --indigo-claro: #4636b0;
+  --champagne: #ecd9ae;
+  --papel: #f6efe0;
+  --tinta: #1a1433;
+  --rosa: #ff9db1;
+  --linea: rgba(236, 217, 174, 0.25);
+  --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --sans: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --pad: clamp(20px, 6vw, 40px);
+  --notch: 14px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-* { margin: 0; }
 
 html {
+  background: var(--noche);
   -webkit-text-size-adjust: 100%;
   scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
   min-height: 100svh;
   overflow-x: hidden;
-  background-color: var(--fondo);
-  background-image:
-    radial-gradient(60rem 40rem at 90% -8%, rgba(242, 167, 160, 0.16), transparent 60%),
-    radial-gradient(50rem 40rem at -10% 45%, rgba(233, 211, 168, 0.08), transparent 60%);
-  background-repeat: no-repeat;
-  color: var(--texto);
+  background:
+    radial-gradient(70% 45% at 85% 0%, rgba(70, 54, 176, 0.45), transparent),
+    radial-gradient(55% 35% at 0% 45%, rgba(255, 157, 177, 0.14), transparent),
+    radial-gradient(60% 40% at 100% 85%, rgba(70, 54, 176, 0.35), transparent),
+    var(--noche);
+  color: var(--papel);
   font-family: var(--sans);
-  font-size: clamp(16px, 2.3vw, 19px);
-  font-weight: 300;
-  line-height: 1.65;
+  font-size: 17px;
+  line-height: 1.6;
 }
 
 body.bloqueado { overflow: hidden; }
 
+button, a { font: inherit; }
+
 :focus-visible {
-  outline: 3px solid var(--rosa);
+  outline: 3px solid var(--champagne);
   outline-offset: 4px;
 }
 
-.portada {
+#intro {
   position: fixed;
   inset: 0;
-  z-index: 10;
-  display: grid;
-  place-items: center;
-  padding: 24px;
-  background: var(--fondo);
-  transition: opacity 0.6s ease, visibility 0.6s ease;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(28px, 8vh, 56px);
+  padding: var(--pad);
+  background:
+    radial-gradient(60% 50% at 50% 40%, #241a5c, transparent),
+    var(--noche);
+  text-align: center;
+  transition: opacity 0.9s ease, visibility 0.9s ease;
 }
 
-.portada[hidden] { display: none; }
-
-.portada.salir {
+#intro.salir {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
 }
 
-.portada-in {
-  display: grid;
-  justify-items: center;
-  gap: 40px;
-  padding-top: 8vh;
-  text-align: center;
+.intro-texto h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(38px, 11vw, 64px);
+  line-height: 1;
+  transition: opacity 0.5s ease;
 }
 
-.portada-titulo {
-  font-family: var(--display);
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(34px, 9vw, 56px);
-  line-height: 1.1;
-  color: var(--champan);
+.intro-texto p {
+  margin: 12px 0 0;
+  color: var(--champagne);
+  opacity: 0.8;
+  transition: opacity 0.5s ease;
 }
+
+#intro.abierto .intro-texto h2,
+#intro.abierto .intro-texto p { opacity: 0; }
 
 .sobre {
-  width: min(84vw, 400px);
+  position: relative;
+  width: min(86vw, 380px);
+  aspect-ratio: 3 / 2;
   padding: 0;
   border: 0;
   background: none;
@@ -101,107 +111,83 @@ body.bloqueado { overflow: hidden; }
   -webkit-tap-highlight-color: transparent;
 }
 
-.sobre-caja {
-  position: relative;
-  aspect-ratio: 3 / 2;
-  border: 1px solid var(--linea);
-  border-radius: 10px;
-  background: var(--sobre-1);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-}
-
-.carta {
-  position: absolute;
-  inset: 8%;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  border-radius: 6px;
-  background: var(--champan);
-  color: var(--sobre-1);
-  font-family: var(--display);
-  font-style: italic;
-  font-size: clamp(20px, 5.5vw, 28px);
-  transition: transform 0.8s var(--salida) 0.25s;
-}
-
-.frente {
+.sobre > * {
   position: absolute;
   inset: 0;
-  z-index: 2;
-  border-radius: 10px;
-  background: var(--sobre-2);
-  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
 }
 
-.solapa {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+.s-fondo { background: var(--indigo); }
+
+.s-carta {
+  inset: 8% 7% auto;
+  height: 88%;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  padding: 14px 10px;
+  background: var(--papel);
+  color: var(--tinta);
+  text-align: center;
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s;
+}
+
+.s-carta span {
+  font-size: 13px;
+}
+
+.s-carta strong {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(22px, 7vw, 30px);
+  line-height: 1.05;
+}
+
+.s-frente {
   z-index: 3;
-  height: 60%;
-  background: var(--sobre-3);
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  transform-origin: top;
+  background: #3a2d8f;
+  clip-path: polygon(0 0, 50% 56%, 100% 0, 100% 100%, 0 100%);
+}
+
+.s-tapa {
+  z-index: 4;
+  background: var(--indigo-claro);
+  clip-path: polygon(0 0, 100% 0, 50% 58%);
+  transform-origin: 50% 0;
   transition: transform 0.6s ease, z-index 0s 0.3s;
 }
 
-.sello {
-  position: absolute;
-  top: 46%;
+.s-sello {
+  inset: auto;
+  z-index: 5;
   left: 50%;
-  z-index: 4;
-  display: grid;
-  place-items: center;
-  width: 54px;
-  height: 54px;
+  top: 58%;
+  width: 17%;
+  aspect-ratio: 1;
   border-radius: 50%;
   background: var(--rosa);
-  color: var(--sobre-1);
-  font-family: var(--display);
-  font-style: italic;
-  font-size: 24px;
-  font-weight: 500;
+  box-shadow: inset 0 0 0 4px rgba(15, 11, 36, 0.18), 0 6px 18px rgba(0, 0, 0, 0.4);
   transform: translate(-50%, -50%);
+  animation: latido 1.8s ease-in-out infinite;
   transition: opacity 0.3s ease;
 }
 
-.portada.abierto .solapa {
-  z-index: 0;
-  transform: rotateX(180deg);
+@keyframes latido {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); }
+  50% { transform: translate(-50%, -50%) scale(1.12); }
 }
 
-.portada.abierto .carta { transform: translateY(-38%); }
-.portada.abierto .sello { opacity: 0; }
+#intro.abierto .s-tapa { transform: rotateX(180deg); z-index: 1; }
+#intro.abierto .s-carta { transform: translateY(-62%); }
+#intro.abierto .s-sello { opacity: 0; animation: none; }
 
-.pista {
-  font-size: 15px;
-  color: rgba(246, 237, 227, 0.7);
-}
-
-.sonido {
-  position: fixed;
-  right: 16px;
-  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
-  z-index: 5;
-  padding: 10px 18px;
-  border: 1px solid var(--linea);
-  border-radius: 999px;
-  background: rgba(32, 12, 24, 0.85);
-  color: var(--champan);
-  font-family: var(--sans);
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.sonido[hidden] { display: none; }
-
-main {
+.wrap {
   width: 100%;
-  max-width: 1040px;
+  max-width: 720px;
   margin: 0 auto;
-  padding: 0 var(--margen);
+  padding: 0 var(--pad);
 }
 
 .hero {
@@ -209,362 +195,481 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: clamp(20px, 4vw, 36px);
-  padding: clamp(40px, 8vw, 96px) 0;
+  align-items: center;
+  gap: clamp(16px, 3vh, 28px);
+  padding: 64px var(--pad);
+  text-align: center;
 }
 
-.hero-intro {
-  max-width: 34ch;
-  color: var(--rosa);
-  font-weight: 400;
+.hero .saludo {
+  margin: 0;
+  color: var(--champagne);
+  font-size: clamp(16px, 3.6vw, 20px);
 }
 
 .hero h1 {
-  font-family: var(--display);
-  font-style: italic;
+  margin: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-family: var(--serif);
   font-weight: 400;
-  font-size: clamp(56px, 14vw, 160px);
-  line-height: 0.95;
-  letter-spacing: -0.01em;
-  color: var(--champan);
+  font-size: clamp(56px, 17vw, 168px);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
 }
 
-.hero-sub {
-  max-width: 36ch;
-  font-size: clamp(18px, 3vw, 24px);
-}
-
-.fecha {
-  display: flex;
-  align-items: flex-end;
-  gap: clamp(14px, 3vw, 28px);
-  padding-top: clamp(16px, 3vw, 32px);
-  border-top: 1px solid var(--linea);
-}
-
-.fecha-dia {
-  font-family: var(--display);
-  font-style: italic;
-  font-size: clamp(72px, 18vw, 180px);
-  line-height: 0.85;
+.hero .sub {
+  margin: 0;
   color: var(--rosa);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(26px, 6vw, 44px);
+  line-height: 1.1;
 }
 
-.fecha-resto {
-  padding-bottom: 0.4em;
-  font-size: clamp(18px, 3.4vw, 28px);
-  line-height: 1.3;
-}
-
-.fecha-resto span { display: block; }
-
-.a { animation: sube 0.9s var(--salida) var(--d, 0s) both paused; }
-body.listo .a { animation-play-state: running; }
-
-@keyframes sube {
-  from { opacity: 0; transform: translateY(18px); }
-  to { opacity: 1; transform: none; }
+.hero .cuando {
+  margin: clamp(12px, 3vh, 32px) 0 0;
+  padding: 10px 22px;
+  border: 1px solid var(--linea);
+  border-radius: 999px;
+  font-size: clamp(15px, 3.6vw, 19px);
 }
 
 .seccion {
-  padding: clamp(56px, 10vw, 120px) 0;
-  border-top: 1px solid var(--linea);
+  padding: clamp(40px, 8vw, 88px) 0;
 }
 
-h2 {
-  margin-bottom: clamp(20px, 4vw, 40px);
-  font-family: var(--display);
-  font-style: italic;
-  font-weight: 400;
-  font-size: clamp(34px, 7vw, 64px);
-  line-height: 1.1;
-  color: var(--champan);
-}
-
-.mensaje p {
+.mensaje {
+  margin: 0 auto;
   max-width: 34ch;
-  font-family: var(--display);
-  font-style: italic;
-  font-size: clamp(24px, 4.6vw, 44px);
-  line-height: 1.3;
-  color: var(--texto);
-}
-
-.mensaje p + p {
-  max-width: 60ch;
-  margin-top: clamp(20px, 4vw, 36px);
-  font-family: var(--sans);
-  font-style: normal;
-  font-size: clamp(16px, 2.3vw, 19px);
-  line-height: 1.7;
-  color: rgba(246, 237, 227, 0.85);
+  font-family: var(--serif);
+  font-size: clamp(26px, 5.4vw, 40px);
+  line-height: 1.25;
+  text-align: center;
 }
 
 .cuenta {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
+  text-align: center;
 }
 
 .cuenta div {
-  padding: 4px clamp(6px, 2vw, 24px);
+  padding: 4px 4px;
   border-left: 1px solid var(--linea);
+  font-size: clamp(12px, 2.8vw, 16px);
+  color: var(--champagne);
 }
 
-.cuenta div:first-child {
-  padding-left: 0;
-  border-left: 0;
-}
+.cuenta div:first-child { border-left: 0; }
 
-.cuenta strong {
+.cuenta b {
   display: block;
-  font-size: clamp(34px, 11vw, 120px);
-  font-weight: 300;
-  line-height: 1.05;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(40px, 12vw, 92px);
+  line-height: 1;
   font-variant-numeric: tabular-nums;
-  color: var(--champan);
+  color: var(--papel);
 }
 
-.cuenta span {
-  font-size: clamp(13px, 2.4vw, 18px);
-  color: rgba(246, 237, 227, 0.75);
+.fin {
+  min-height: 1.6em;
+  margin: 20px 0 0;
+  text-align: center;
+  font-family: var(--serif);
+  font-size: clamp(22px, 5vw, 32px);
+  color: var(--rosa);
 }
 
-.final {
-  min-height: 1.65em;
+.ticket {
+  display: grid;
+  filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.4));
+}
+
+.t-arriba, .t-abajo {
+  position: relative;
+  background: var(--papel);
+  color: var(--tinta);
+  padding: clamp(24px, 6vw, 40px);
+}
+
+.t-arriba {
+  border-radius: 24px 24px 0 0;
+  -webkit-mask:
+    radial-gradient(circle var(--notch) at 0 100%, #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% 100%, #0000 98%, #000) right / 51% 100% no-repeat;
+  mask:
+    radial-gradient(circle var(--notch) at 0 100%, #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% 100%, #0000 98%, #000) right / 51% 100% no-repeat;
+}
+
+.t-abajo {
+  border-radius: 0 0 24px 24px;
+  -webkit-mask:
+    radial-gradient(circle var(--notch) at 0 0, #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% 0, #0000 98%, #000) right / 51% 100% no-repeat;
+  mask:
+    radial-gradient(circle var(--notch) at 0 0, #0000 98%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle var(--notch) at 100% 0, #0000 98%, #000) right / 51% 100% no-repeat;
+}
+
+.t-abajo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: calc(var(--notch) + 8px);
+  right: calc(var(--notch) + 8px);
+  border-top: 2px dashed rgba(26, 20, 51, 0.25);
+}
+
+.t-etiqueta {
+  margin: 0;
+  font-size: 14px;
+  color: rgba(26, 20, 51, 0.65);
+}
+
+.t-titulo {
+  margin: 4px 0 24px;
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(34px, 8vw, 52px);
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.t-datos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.t-valor {
+  margin: 2px 0 0;
+  font-size: clamp(18px, 4.4vw, 22px);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.t-abajo .t-valor + .t-valor {
+  margin-top: 0;
+  font-weight: 400;
+}
+
+.barras {
+  height: 38px;
   margin-top: 24px;
-  color: var(--rosa);
+  background: repeating-linear-gradient(
+    90deg,
+    var(--tinta) 0 2px, transparent 2px 5px,
+    var(--tinta) 5px 6px, transparent 6px 10px,
+    var(--tinta) 10px 13px, transparent 13px 15px
+  );
+  opacity: 0.8;
+}
+
+.bloque {
+  padding: clamp(28px, 6vw, 48px);
+  border: 1px solid var(--linea);
+  border-radius: 28px;
+  text-align: center;
+}
+
+.bloque h2 {
+  margin: 0 0 12px;
+  font-family: var(--serif);
   font-weight: 400;
+  font-size: clamp(34px, 8vw, 52px);
+  line-height: 1;
 }
 
-.datos div {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 4px;
-  padding: clamp(16px, 3vw, 28px) 0;
-  border-bottom: 1px solid var(--linea);
-}
-
-.datos div:first-child { border-top: 1px solid var(--linea); }
-
-.datos dt {
-  color: var(--rosa);
-  font-weight: 400;
-}
-
-.datos dd {
-  font-size: clamp(18px, 3vw, 26px);
-  line-height: 1.4;
-}
-
-.acciones {
-  display: grid;
-  gap: clamp(48px, 8vw, 80px);
-}
-
-.acciones p {
+.bloque p {
   max-width: 44ch;
-  margin-bottom: 28px;
-  color: rgba(246, 237, 227, 0.85);
+  margin: 0 auto;
 }
 
-.acciones h2 { font-size: clamp(30px, 5.5vw, 48px); }
+.bloque .destacado {
+  margin-bottom: 8px;
+  font-size: clamp(20px, 4.6vw, 26px);
+  font-weight: 600;
+  color: var(--champagne);
+}
+
+.colores {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin: 24px 0 0;
+}
+
+.colores i {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--linea);
+}
+
+.colores i:nth-child(1) { background: var(--papel); }
+.colores i:nth-child(2) { background: var(--indigo-claro); }
+.colores i:nth-child(3) { background: var(--rosa); }
+
+.separa { height: clamp(20px, 4vw, 32px); }
 
 .boton {
   display: inline-block;
-  padding: 16px 32px;
-  border: 1px solid var(--champan);
+  width: 100%;
+  max-width: 340px;
+  margin-top: 28px;
+  padding: 16px 28px;
   border-radius: 999px;
-  color: var(--champan);
-  font-size: 17px;
-  font-weight: 500;
+  background: var(--champagne);
+  color: var(--noche);
+  font-weight: 600;
   text-align: center;
   text-decoration: none;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.boton:hover {
-  background: var(--champan);
-  color: var(--fondo);
-}
-
-.boton.lleno {
-  background: var(--champan);
-  color: var(--fondo);
-}
-
-.boton.lleno:hover {
-  background: var(--rosa);
-  border-color: var(--rosa);
-}
+.boton:hover { background: #f6e8c6; }
+.boton:active { transform: scale(0.98); }
 
 .cierre {
-  padding: clamp(56px, 10vw, 120px) 0 calc(clamp(56px, 10vw, 120px) + env(safe-area-inset-bottom, 0px));
-  border-top: 1px solid var(--linea);
-  font-family: var(--display);
+  padding: clamp(48px, 10vw, 100px) var(--pad) calc(clamp(48px, 10vw, 100px) + env(safe-area-inset-bottom, 0px));
+  text-align: center;
+  font-family: var(--serif);
   font-style: italic;
-  font-size: clamp(44px, 11vw, 120px);
+  font-size: clamp(44px, 12vw, 96px);
   line-height: 1;
   color: var(--rosa);
 }
 
-@media (min-width: 720px) {
-  .datos div {
-    grid-template-columns: 14rem minmax(0, 1fr);
-    align-items: baseline;
-    gap: 24px;
-  }
+#audioBtn {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right, 0px));
+  bottom: max(16px, env(safe-area-inset-bottom, 0px));
+  z-index: 50;
+  display: none;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border: 1px solid var(--linea);
+  border-radius: 50%;
+  background: rgba(15, 11, 36, 0.8);
+  color: var(--champagne);
+  cursor: pointer;
+}
 
-  .acciones { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#audioBtn.visible { display: grid; place-items: center; }
+#audioBtn svg { width: 22px; height: 22px; }
+#audioBtn .off { display: none; }
+#audioBtn[aria-pressed="true"] .on { display: none; }
+#audioBtn[aria-pressed="true"] .off { display: block; }
+
+@media (max-width: 420px) {
+  body { font-size: 16px; }
+  .cuenta div { padding: 4px 2px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .a { animation: none; }
-  .carta, .solapa, .sello, .portada { transition-duration: 0.01s; transition-delay: 0s; }
+  .s-sello { animation: none; }
+  .s-tapa, .s-carta, #intro { transition-duration: 0.01s; transition-delay: 0s; }
 }
 </style>
 </head>
-<body class="bloqueado">
+<body class="bloqueado" data-fecha="2026-12-12T18:00:00">
 
-<div class="portada" id="portada" role="dialog" aria-modal="true" aria-label="Invitación">
-  <div class="portada-in">
-    <p class="portada-titulo">Tienes una invitación</p>
-    <button class="sobre" id="sobre" type="button" aria-label="Abrir la invitación">
-      <span class="sobre-caja">
-        <span class="carta">Noche de despedida</span>
-        <span class="frente"></span>
-        <span class="solapa"></span>
-        <span class="sello">11</span>
-      </span>
-    </button>
-    <p class="pista">Toca el sobre para abrirlo</p>
+<div id="intro" role="dialog" aria-modal="true" aria-label="Invitación">
+  <div class="intro-texto">
+    <h2>Tienes una invitación</h2>
+    <p>Toca el sobre para abrirlo</p>
   </div>
+  <button class="sobre" id="sobre" type="button" aria-label="Abrir invitación">
+    <span class="s-fondo"></span>
+    <span class="s-carta"><span>Estás invitado a</span><strong>Nombre del evento</strong></span>
+    <span class="s-frente"></span>
+    <span class="s-tapa"></span>
+    <span class="s-sello"></span>
+  </button>
 </div>
 
 <audio id="musica" src="cancion.mp3" loop preload="none"></audio>
-<button class="sonido" id="sonido" type="button" aria-pressed="true" hidden>Silenciar música</button>
 
-<main data-fecha="2026-12-05T17:00:00">
+<button id="audioBtn" type="button" aria-label="Silenciar música" aria-pressed="false">
+  <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+  <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m16 9 5 6"/><path d="m21 9-5 6"/></svg>
+</button>
 
-  <header class="hero">
-    <p class="hero-intro a" style="--d:0s">El grado décimo te invita a</p>
-    <h1 class="a" style="--d:0.1s">Noche de<br>despedida</h1>
-    <p class="hero-sub a" style="--d:0.2s">Un homenaje a los estudiantes de grado once.</p>
-    <div class="fecha a" style="--d:0.3s">
-      <span class="fecha-dia" id="fDia">00</span>
-      <p class="fecha-resto">
-        <span id="fMes">mes</span>
-        <span id="fAnio">año</span>
-      </p>
-    </div>
-  </header>
+<header class="hero">
+  <p class="saludo">Estás invitado a</p>
+  <h1>Nombre del evento</h1>
+  <p class="sub">Una noche para recordar</p>
+  <p class="cuando" data-f="largo">Fecha del evento</p>
+</header>
 
-  <section class="seccion mensaje" aria-label="Mensaje">
-    <p>Ha llegado el momento de decir "hasta pronto" a quienes han dejado huella en nuestros pasillos, nuestras risas y nuestros corazones.</p>
-    <p>Celebremos juntos su esfuerzo, su historia y todo lo que está por venir. Porque las despedidas duelen, sí, pero también brillan, cuando se hacen con amor.</p>
+<main class="wrap">
+
+  <section class="seccion">
+    <p class="mensaje">Escribe aquí un mensaje breve para tus invitados. Cuéntales qué celebramos y por qué su presencia hace la diferencia.</p>
   </section>
 
   <section class="seccion" aria-label="Cuenta regresiva">
-    <h2>Faltan</h2>
     <div class="cuenta">
-      <div><strong id="dias">--</strong><span>días</span></div>
-      <div><strong id="horas">--</strong><span>horas</span></div>
-      <div><strong id="minutos">--</strong><span>min</span></div>
-      <div><strong id="segundos">--</strong><span>seg</span></div>
+      <div><b id="dias">--</b>Días</div>
+      <div><b id="horas">--</b>Horas</div>
+      <div><b id="minutos">--</b>Min</div>
+      <div><b id="segundos">--</b>Seg</div>
     </div>
-    <p class="final" id="mensajeFinal" aria-live="polite"></p>
+    <p class="fin" id="fin" aria-live="polite"></p>
   </section>
 
-  <section class="seccion" aria-label="Detalles">
-    <h2>Detalles</h2>
-    <dl class="datos">
-      <div><dt>Fecha</dt><dd id="datoFecha">Por definir</dd></div>
-      <div><dt>Hora</dt><dd id="datoHora">Por definir</dd></div>
-      <div><dt>Recepción</dt><dd>Nombre del lugar<br>Dirección del lugar, Ciudad</dd></div>
-      <div><dt>Vestimenta</dt><dd>Formal, para mujeres y hombres</dd></div>
-    </dl>
+  <section class="seccion">
+    <div class="ticket">
+      <div class="t-arriba">
+        <p class="t-etiqueta">Entrada personal</p>
+        <h2 class="t-titulo">Nombre del evento</h2>
+        <div class="t-datos">
+          <div>
+            <p class="t-etiqueta">Fecha</p>
+            <p class="t-valor" data-f="corta">Fecha</p>
+          </div>
+          <div>
+            <p class="t-etiqueta">Hora</p>
+            <p class="t-valor" data-f="hora">Hora</p>
+          </div>
+        </div>
+      </div>
+      <div class="t-abajo">
+        <p class="t-etiqueta">Lugar</p>
+        <p class="t-valor">Nombre del lugar</p>
+        <p class="t-valor">Dirección del lugar, Ciudad</p>
+        <div class="barras" aria-hidden="true"></div>
+      </div>
+    </div>
   </section>
 
-  <section class="seccion acciones" aria-label="Música y asistencia">
-    <div>
-      <h2>Música</h2>
-      <p>Ayúdanos a que todos disfrutemos del evento. Agrega las canciones que quieres escuchar en la lista colaborativa.</p>
-      <a class="boton" href="#" target="_blank" rel="noopener noreferrer">Abrir la lista</a>
-    </div>
-    <div>
-      <h2>Asistencia</h2>
-      <p>Es muy importante saber que contamos contigo. Completa el formulario para confirmar tu asistencia.</p>
-      <a class="boton lleno" href="#" target="_blank" rel="noopener noreferrer">Confirmar asistencia</a>
-    </div>
+  <section class="bloque">
+    <h2>Código de vestimenta</h2>
+    <p class="destacado">Formal</p>
+    <p>Describe aquí los colores o estilos sugeridos para la ocasión.</p>
+    <div class="colores" aria-hidden="true"><i></i><i></i><i></i></div>
   </section>
 
-  <footer class="cierre">Te esperamos</footer>
+  <div class="separa"></div>
+
+  <section class="bloque">
+    <h2>Música</h2>
+    <p>Agrega las canciones que quieres escuchar en la playlist del evento.</p>
+    <a class="boton" href="#" target="_blank" rel="noopener noreferrer">Abrir playlist</a>
+  </section>
+
+  <div class="separa"></div>
+
+  <section class="bloque">
+    <h2>Confirma tu asistencia</h2>
+    <p>Avísanos si podrás acompañarnos para organizar todo con tiempo.</p>
+    <a class="boton" href="#" target="_blank" rel="noopener noreferrer">Confirmar</a>
+  </section>
 
 </main>
 
+<footer class="cierre">Te esperamos</footer>
+
 <script>
-(() => {
-  const $ = (id) => document.getElementById(id);
-  const portada = $("portada");
-  const audio = $("musica");
-  const botonSonido = $("sonido");
-  const raiz = document.querySelector("[data-fecha]");
-  const fecha = new Date(raiz.dataset.fecha);
-  const valida = !isNaN(fecha);
-  const cap = (t) => t.charAt(0).toUpperCase() + t.slice(1);
-  const pad = (n) => String(n).padStart(2, "0");
+(function () {
+  var fecha = new Date(document.body.dataset.fecha);
+  var objetivo = fecha.getTime();
 
-  if (valida) {
-    const fmt = (op) => new Intl.DateTimeFormat("es", op).format(fecha);
-    $("fDia").textContent = pad(fecha.getDate());
-    $("fMes").textContent = fmt({ month: "long" });
-    $("fAnio").textContent = fecha.getFullYear();
-    $("datoFecha").textContent = cap(fmt({ weekday: "long", day: "numeric", month: "long", year: "numeric" }));
-    $("datoHora").textContent = fmt({ hour: "numeric", minute: "2-digit" });
-  }
-
-  const dias = $("dias");
-  const horas = $("horas");
-  const minutos = $("minutos");
-  const segundos = $("segundos");
-  let intervalo = 0;
-
-  const tick = () => {
-    const resto = fecha - Date.now();
-    if (resto <= 0) {
-      clearInterval(intervalo);
-      $("mensajeFinal").textContent = "Llegó la hora. Disfruta del evento.";
-      dias.textContent = horas.textContent = minutos.textContent = segundos.textContent = "00";
-      return;
-    }
-    dias.textContent = Math.floor(resto / 86400000);
-    horas.textContent = pad(Math.floor((resto % 86400000) / 3600000));
-    minutos.textContent = pad(Math.floor((resto % 3600000) / 60000));
-    segundos.textContent = pad(Math.floor((resto % 60000) / 1000));
+  var formatos = {
+    largo: { weekday: "long", day: "numeric", month: "long", year: "numeric" },
+    corta: { day: "numeric", month: "long", year: "numeric" },
+    hora: { hour: "numeric", minute: "2-digit", hour12: true }
   };
 
-  if (valida) {
-    tick();
-    intervalo = setInterval(() => { if (!document.hidden) tick(); }, 1000);
-    document.addEventListener("visibilitychange", () => { if (!document.hidden) tick(); });
+  document.querySelectorAll("[data-f]").forEach(function (el) {
+    el.textContent = new Intl.DateTimeFormat("es", formatos[el.dataset.f]).format(fecha);
+  });
+
+  var el = {
+    d: document.getElementById("dias"),
+    h: document.getElementById("horas"),
+    m: document.getElementById("minutos"),
+    s: document.getElementById("segundos"),
+    fin: document.getElementById("fin")
+  };
+
+  function poner(nodo, valor) {
+    if (nodo.textContent !== valor) nodo.textContent = valor;
   }
 
-  $("sobre").addEventListener("click", () => {
-    portada.classList.add("abierto");
-    audio.play().then(() => { botonSonido.hidden = false; }).catch(() => {});
-    setTimeout(() => {
-      portada.classList.add("salir");
+  var timer = null;
+
+  function tick() {
+    var resto = objetivo - Date.now();
+    if (resto <= 0) {
+      clearInterval(timer);
+      timer = null;
+      poner(el.d, "0"); poner(el.h, "00"); poner(el.m, "00"); poner(el.s, "00");
+      el.fin.textContent = "Llegó la hora. Disfruta del evento";
+      return;
+    }
+    poner(el.d, String(Math.floor(resto / 86400000)));
+    poner(el.h, String(Math.floor(resto % 86400000 / 3600000)).padStart(2, "0"));
+    poner(el.m, String(Math.floor(resto % 3600000 / 60000)).padStart(2, "0"));
+    poner(el.s, String(Math.floor(resto % 60000 / 1000)).padStart(2, "0"));
+  }
+
+  function iniciar() {
+    if (timer === null) {
+      tick();
+      if (objetivo > Date.now()) timer = setInterval(tick, 1000);
+    }
+  }
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) {
+      clearInterval(timer);
+      timer = null;
+    } else if (objetivo > Date.now()) {
+      iniciar();
+    }
+  });
+
+  iniciar();
+
+  var intro = document.getElementById("intro");
+  var sobre = document.getElementById("sobre");
+  var audio = document.getElementById("musica");
+  var audioBtn = document.getElementById("audioBtn");
+  var reducido = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  sobre.addEventListener("click", function () {
+    if (intro.classList.contains("abierto")) return;
+    intro.classList.add("abierto");
+
+    audio.play().then(function () {
+      audioBtn.classList.add("visible");
+    }).catch(function () {});
+
+    setTimeout(function () {
+      intro.classList.add("salir");
       document.body.classList.remove("bloqueado");
-      document.body.classList.add("listo");
-    }, 1100);
-    setTimeout(() => { portada.hidden = true; }, 1800);
+    }, reducido ? 200 : 1700);
+
+    setTimeout(function () {
+      intro.remove();
+    }, reducido ? 400 : 2700);
   }, { once: true });
 
-  botonSonido.addEventListener("click", () => {
-    const activo = botonSonido.getAttribute("aria-pressed") === "true";
-    audio.muted = activo;
-    botonSonido.setAttribute("aria-pressed", String(!activo));
-    botonSonido.textContent = activo ? "Activar música" : "Silenciar música";
+  audioBtn.addEventListener("click", function () {
+    var silenciado = audio.paused;
+    if (silenciado) {
+      audio.play().catch(function () {});
+    } else {
+      audio.pause();
+    }
+    audioBtn.setAttribute("aria-pressed", String(!silenciado));
+    audioBtn.setAttribute("aria-label", silenciado ? "Silenciar música" : "Activar música");
   });
 })();
 </script>
