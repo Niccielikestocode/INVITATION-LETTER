@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0f0b24">
 <meta name="color-scheme" content="dark">
-<title>Invitación</title>
+<title>Event name</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -18,7 +18,16 @@
   --papel: #f6efe0;
   --tinta: #1a1433;
   --rosa: #ff9db1;
-  --linea: rgba(236, 217, 174, 0.25);
+  --linea: rgba(236,217,174,0.25);
+  --glow-1: rgba(70,54,176,0.45);
+  --glow-2: rgba(255,157,177,0.14);
+  --glow-3: rgba(70,54,176,0.35);
+  --intro-glow: #251c5f;
+  --frente: #392b8f;
+  --hover: #f3e6ca;
+  --noche-a: rgba(15,11,36,0.8);
+  --tinta-s: rgba(26,20,51,0.65);
+  --tinta-l: rgba(26,20,51,0.25);
   --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
   --sans: "DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --pad: clamp(20px, 6vw, 40px);
@@ -38,9 +47,9 @@ body {
   min-height: 100svh;
   overflow-x: hidden;
   background:
-    radial-gradient(70% 45% at 85% 0%, rgba(70, 54, 176, 0.45), transparent),
-    radial-gradient(55% 35% at 0% 45%, rgba(255, 157, 177, 0.14), transparent),
-    radial-gradient(60% 40% at 100% 85%, rgba(70, 54, 176, 0.35), transparent),
+    radial-gradient(70% 45% at 85% 0%, var(--glow-1), transparent),
+    radial-gradient(55% 35% at 0% 45%, var(--glow-2), transparent),
+    radial-gradient(60% 40% at 100% 85%, var(--glow-3), transparent),
     var(--noche);
   color: var(--papel);
   font-family: var(--sans);
@@ -68,7 +77,7 @@ button, a { font: inherit; }
   gap: clamp(28px, 8vh, 56px);
   padding: var(--pad);
   background:
-    radial-gradient(60% 50% at 50% 40%, #241a5c, transparent),
+    radial-gradient(60% 50% at 50% 40%, var(--intro-glow), transparent),
     var(--noche);
   text-align: center;
   transition: opacity 0.9s ease, visibility 0.9s ease;
@@ -134,20 +143,19 @@ button, a { font: inherit; }
   transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.4s;
 }
 
-.s-carta span {
-  font-size: 13px;
-}
+.s-carta span { font-size: 13px; }
 
 .s-carta strong {
   font-family: var(--serif);
   font-weight: 400;
   font-size: clamp(22px, 7vw, 30px);
   line-height: 1.05;
+  overflow-wrap: anywhere;
 }
 
 .s-frente {
   z-index: 3;
-  background: #3a2d8f;
+  background: var(--frente);
   clip-path: polygon(0 0, 50% 56%, 100% 0, 100% 100%, 0 100%);
 }
 
@@ -168,7 +176,7 @@ button, a { font: inherit; }
   aspect-ratio: 1;
   border-radius: 50%;
   background: var(--rosa);
-  box-shadow: inset 0 0 0 4px rgba(15, 11, 36, 0.18), 0 6px 18px rgba(0, 0, 0, 0.4);
+  box-shadow: inset 0 0 0 4px rgba(0, 0, 0, 0.18), 0 6px 18px rgba(0, 0, 0, 0.4);
   transform: translate(-50%, -50%);
   animation: latido 1.8s ease-in-out infinite;
   transition: opacity 0.3s ease;
@@ -235,9 +243,7 @@ button, a { font: inherit; }
   font-size: clamp(15px, 3.6vw, 19px);
 }
 
-.seccion {
-  padding: clamp(40px, 8vw, 88px) 0;
-}
+.seccion { padding: clamp(40px, 8vw, 88px) 0; }
 
 .mensaje {
   margin: 0 auto;
@@ -320,13 +326,13 @@ button, a { font: inherit; }
   top: 0;
   left: calc(var(--notch) + 8px);
   right: calc(var(--notch) + 8px);
-  border-top: 2px dashed rgba(26, 20, 51, 0.25);
+  border-top: 2px dashed var(--tinta-l);
 }
 
 .t-etiqueta {
   margin: 0;
   font-size: 14px;
-  color: rgba(26, 20, 51, 0.65);
+  color: var(--tinta-s);
 }
 
 .t-titulo {
@@ -430,7 +436,7 @@ button, a { font: inherit; }
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.boton:hover { background: #f6e8c6; }
+.boton:hover { background: var(--hover); }
 .boton:active { transform: scale(0.98); }
 
 .cierre {
@@ -441,6 +447,7 @@ button, a { font: inherit; }
   font-size: clamp(44px, 12vw, 96px);
   line-height: 1;
   color: var(--rosa);
+  overflow-wrap: anywhere;
 }
 
 #audioBtn {
@@ -454,7 +461,7 @@ button, a { font: inherit; }
   padding: 0;
   border: 1px solid var(--linea);
   border-radius: 50%;
-  background: rgba(15, 11, 36, 0.8);
+  background: var(--noche-a);
   color: var(--champagne);
   cursor: pointer;
 }
@@ -479,46 +486,41 @@ button, a { font: inherit; }
 </head>
 <body class="bloqueado" data-fecha="2026-12-12T18:00:00">
 
-<div id="intro" role="dialog" aria-modal="true" aria-label="Invitación">
+<div id="intro" role="dialog" aria-modal="true" aria-label="Invitation">
   <div class="intro-texto">
-    <h2>Tienes una invitación</h2>
-    <p>Toca el sobre para abrirlo</p>
+    <h2>You have an invitation</h2>
+    <p>Tap the envelope to open it</p>
   </div>
-  <button class="sobre" id="sobre" type="button" aria-label="Abrir invitación">
+  <button class="sobre" id="sobre" type="button" aria-label="Open invitation">
     <span class="s-fondo"></span>
-    <span class="s-carta"><span>Estás invitado a</span><strong>Nombre del evento</strong></span>
+    <span class="s-carta"><span>You are invited to</span><strong>Event name</strong></span>
     <span class="s-frente"></span>
     <span class="s-tapa"></span>
     <span class="s-sello"></span>
   </button>
 </div>
 
-<audio id="musica" src="cancion.mp3" loop preload="none"></audio>
 
-<button id="audioBtn" type="button" aria-label="Silenciar música" aria-pressed="false">
-  <svg class="on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
-  <svg class="off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="m16 9 5 6"/><path d="m21 9-5 6"/></svg>
-</button>
 
 <header class="hero">
-  <p class="saludo">Estás invitado a</p>
-  <h1>Nombre del evento</h1>
-  <p class="sub">Una noche para recordar</p>
-  <p class="cuando" data-f="largo">Fecha del evento</p>
+  <p class="saludo">You are invited to</p>
+  <h1>Event name</h1>
+  <p class="sub">A night to remember</p>
+  <p class="cuando" data-f="largo">Event date</p>
 </header>
 
 <main class="wrap">
 
   <section class="seccion">
-    <p class="mensaje">Escribe aquí un mensaje breve para tus invitados. Cuéntales qué celebramos y por qué su presencia hace la diferencia.</p>
+    <p class="mensaje">Write a short message for your guests here. Tell them what we are celebrating and why their presence makes a difference.</p>
   </section>
 
-  <section class="seccion" aria-label="Cuenta regresiva">
+  <section class="seccion" aria-label="Countdown">
     <div class="cuenta">
-      <div><b id="dias">--</b>Días</div>
-      <div><b id="horas">--</b>Horas</div>
+      <div><b id="dias">--</b>Days</div>
+      <div><b id="horas">--</b>Hours</div>
       <div><b id="minutos">--</b>Min</div>
-      <div><b id="segundos">--</b>Seg</div>
+      <div><b id="segundos">--</b>Sec</div>
     </div>
     <p class="fin" id="fin" aria-live="polite"></p>
   </section>
@@ -526,54 +528,42 @@ button, a { font: inherit; }
   <section class="seccion">
     <div class="ticket">
       <div class="t-arriba">
-        <p class="t-etiqueta">Entrada personal</p>
-        <h2 class="t-titulo">Nombre del evento</h2>
+        <p class="t-etiqueta">Personal ticket</p>
+        <h2 class="t-titulo">Event name</h2>
         <div class="t-datos">
           <div>
-            <p class="t-etiqueta">Fecha</p>
-            <p class="t-valor" data-f="corta">Fecha</p>
+            <p class="t-etiqueta">Date</p>
+            <p class="t-valor" data-f="corta">Date</p>
           </div>
           <div>
-            <p class="t-etiqueta">Hora</p>
-            <p class="t-valor" data-f="hora">Hora</p>
+            <p class="t-etiqueta">Time</p>
+            <p class="t-valor" data-f="hora">Time</p>
           </div>
         </div>
       </div>
       <div class="t-abajo">
-        <p class="t-etiqueta">Lugar</p>
-        <p class="t-valor">Nombre del lugar</p>
-        <p class="t-valor">Dirección del lugar, Ciudad</p>
+        <p class="t-etiqueta">Venue</p>
+        <p class="t-valor">Venue name</p>
+        <p class="t-valor">Venue address, City</p>
         <div class="barras" aria-hidden="true"></div>
       </div>
     </div>
   </section>
 
   <section class="bloque">
-    <h2>Código de vestimenta</h2>
+    <h2>Dress code</h2>
     <p class="destacado">Formal</p>
-    <p>Describe aquí los colores o estilos sugeridos para la ocasión.</p>
+    <p>Describe the suggested colors or styles for the occasion here.</p>
     <div class="colores" aria-hidden="true"><i></i><i></i><i></i></div>
   </section>
 
-  <div class="separa"></div>
+  
 
-  <section class="bloque">
-    <h2>Música</h2>
-    <p>Agrega las canciones que quieres escuchar en la playlist del evento.</p>
-    <a class="boton" href="#" target="_blank" rel="noopener noreferrer">Abrir playlist</a>
-  </section>
-
-  <div class="separa"></div>
-
-  <section class="bloque">
-    <h2>Confirma tu asistencia</h2>
-    <p>Avísanos si podrás acompañarnos para organizar todo con tiempo.</p>
-    <a class="boton" href="#" target="_blank" rel="noopener noreferrer">Confirmar</a>
-  </section>
+  
 
 </main>
 
-<footer class="cierre">Te esperamos</footer>
+<footer class="cierre">See you there</footer>
 
 <script>
 (function () {
@@ -587,7 +577,7 @@ button, a { font: inherit; }
   };
 
   document.querySelectorAll("[data-f]").forEach(function (el) {
-    el.textContent = new Intl.DateTimeFormat("es", formatos[el.dataset.f]).format(fecha);
+    el.textContent = new Intl.DateTimeFormat("en-US", formatos[el.dataset.f]).format(fecha);
   });
 
   var el = {
@@ -610,7 +600,7 @@ button, a { font: inherit; }
       clearInterval(timer);
       timer = null;
       poner(el.d, "0"); poner(el.h, "00"); poner(el.m, "00"); poner(el.s, "00");
-      el.fin.textContent = "Llegó la hora. Disfruta del evento";
+      el.fin.textContent = "It is time. Enjoy the event";
       return;
     }
     poner(el.d, String(Math.floor(resto / 86400000)));
@@ -647,9 +637,11 @@ button, a { font: inherit; }
     if (intro.classList.contains("abierto")) return;
     intro.classList.add("abierto");
 
-    audio.play().then(function () {
-      audioBtn.classList.add("visible");
-    }).catch(function () {});
+    if (audio) {
+      audio.play().then(function () {
+        audioBtn.classList.add("visible");
+      }).catch(function () {});
+    }
 
     setTimeout(function () {
       intro.classList.add("salir");
@@ -661,18 +653,55 @@ button, a { font: inherit; }
     }, reducido ? 400 : 2700);
   }, { once: true });
 
-  audioBtn.addEventListener("click", function () {
-    var silenciado = audio.paused;
-    if (silenciado) {
-      audio.play().catch(function () {});
-    } else {
-      audio.pause();
-    }
-    audioBtn.setAttribute("aria-pressed", String(!silenciado));
-    audioBtn.setAttribute("aria-label", silenciado ? "Silenciar música" : "Activar música");
-  });
+  if (audio && audioBtn) {
+    audioBtn.addEventListener("click", function () {
+      var silenciado = audio.paused;
+      if (silenciado) {
+        audio.play().catch(function () {});
+      } else {
+        audio.pause();
+      }
+      audioBtn.setAttribute("aria-pressed", String(!silenciado));
+      audioBtn.setAttribute("aria-label", silenciado ? "Mute music" : "Unmute music");
+    });
+  }
 })();
 </script>
 
-</body>
-</html>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
